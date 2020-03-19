@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="mysqli" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/node_modules/mysqli" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/node_modules/mysqli" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
