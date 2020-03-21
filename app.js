@@ -8,14 +8,6 @@ const app = express();
 
 
 
-// Import Routes
-const productsRoute = require('./routes/products');
-const usersRoute = require('./routes/users');
-
-// Use Routes
-app.use('/api/products', productsRoute);
-app.use('/api/users', usersRoute);
-
 
 app.use(cors({
     origin: "*",
@@ -31,5 +23,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+
+// Import Routes
+const productsRoute = require('./routes/products');
+const ordersRoute = require('./routes/orders');
+
+// Use Routes
+app.use('/api/products', productsRoute);
+app.use('/api/orders', ordersRoute);
 
 module.exports = app;
