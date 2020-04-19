@@ -28,7 +28,7 @@ module.exports = {
                     return next();
                 }
             } catch (err) {
-                return res.status(403).send("Authentication faileds");
+                return res.status(403).send("Authentication failed");
             }
         } else {
             return res.status(401).send("No authorization header found.");
@@ -59,12 +59,17 @@ module.exports = {
         const myEmail = req.body.email;          
               
         const user = await db.table('users').filter({$or:[{ email : myEmail },{ username : myEmail }]}).get();
+		
         if (user) {
             const match = await bcrypt.compare(myPlaintextPassword, user.password);
             
             if (match) {
                 req.username = user.username;
                 req.email = user.email;
+				req.fname = user.fname;
+				req.lname = user.lname;
+				req.photoUrl = user.photoUrl;
+				req.userId = user.id;
                 next();
             } else {
                 res.status(401).send("Username or password incorrect");

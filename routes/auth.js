@@ -12,7 +12,16 @@ router.post('/login', [helper.hasAuthFields, helper.isPasswordAndUserMatch], (re
         algorithm: 'HS512',
         expiresIn: '4h'
     });
-    res.json({token: token, auth: true, email: req.body.email, username: req.body.username});
+    res.json({
+        token: token,
+        auth: true,
+        email: req.email,
+        username: req.username,
+        fname: req.fname,
+        lname: req.lname,
+        photoUrl: req.photoUrl,
+        userId: req.userId
+    });
 });
 
 // REGISTER ROUTE

@@ -56,7 +56,7 @@ router.get('/:id', async (req, res) => {
         .filter({'o.id': orderId})
         .getAll()
         .then(orders => {
-            console.log(orders);
+           
             if (orders.length > 0) {
                 res.json(orders);
             } else {
@@ -71,8 +71,6 @@ router.post('/new', async (req, res) => {
     // let userId = req.body.userId;
     // let data = JSON.parse(req.body);
     let {userId, products} = req.body;
-    console.log(userId);
-    console.log(products);
 
      if (userId !== null && userId > 0) {
         database.table('orders')
@@ -142,10 +140,5 @@ router.post('/payment', (req, res) => {
         res.status(200).json({success: true});
     }, 3000)
 });
-
-
-
-
-
 
 module.exports = router;
