@@ -41,7 +41,7 @@ module.exports = {
             if (!req.body.email) {
                 errors.push('Missing email field');
             }
-            if (!req.body.password) {
+            if (!req.body.password && req.body.typeOfUser !== 'social') {
                 errors.push('Missing password field');
             }
 
@@ -78,9 +78,5 @@ module.exports = {
         } else {
             res.status(401).send("Username or password incorrect");
         }
-        
-        
-        
-
-    }
+	}
 };

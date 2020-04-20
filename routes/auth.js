@@ -28,6 +28,7 @@ router.post('/login', [helper.hasAuthFields, helper.isPasswordAndUserMatch], (re
 router.post('/register', [
     check('email').isEmail().not().isEmpty().withMessage('Field can\'t be empty')
         .normalizeEmail({all_lowercase: true}),
+
     check('password').escape().trim().not().isEmpty().withMessage('Field can\'t be empty')
         .isLength({min: 6}).withMessage("must be 6 characters long"),
     body('email').custom(value => {
@@ -49,12 +50,13 @@ router.post('/register', [
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     } else {
-
         let email = req.body.email;
         let username = email.split("@")[0];
         let password = await bcrypt.hash(req.body.password, 10);
         let fname = req.body.fname;
         let lname = req.body.lname;
+        let typeOfUser = req.body.typeOfUser;
+        let photoUrl = req.body.photoUrl === null ? 'https://image.shutterstock.com/image-vector/person-gray-photo-placeholder-man-260nw-1259815156.jpg' : req.body.photoUrl
 
         /**
          * ROLE 777 = ADMIN
@@ -62,16 +64,18 @@ router.post('/register', [
          **/
         helper.database.table('users').insert({
             username: username,
-            password: password,
+            password: password || null,
             email: email,
             role: 555,
             lname: lname || null,
-            fname: fname || null
+            fname: fname || null,
+            type: typeOfUser || 'local',
+            photoUrl: photoUrl
         }).then(lastId => {
             if (lastId > 0) {
-                res.status(201).json({message: 'Registration successful.'});
+                res.status(201).json({message: 'Registration successful'});
             } else {
-                res.status(501).json({message: 'Registration failed.'});
+                res.status(501).json({message: 'Registration failed'});
             }
         }).catch(err => res.status(433).json({error: err}));
     }
