@@ -70,13 +70,15 @@ module.exports = {
 				req.lname = user.lname;
 				req.photoUrl = user.photoUrl;
 				req.userId = user.id;
+				req.type = user.type;
+				req.role = user.role;
                 next();
             } else {
-                res.status(401).send("Username or password incorrect");
+                res.status(401).json({message: "Username or password incorrect", status: false});
             }
             
         } else {
-            res.status(401).send("Username or password incorrect");
+            res.status(401).json({message: "Username or password incorrect", status: false});
         }
 	}
 };

@@ -20,7 +20,9 @@ router.post('/login', [helper.hasAuthFields, helper.isPasswordAndUserMatch], (re
         fname: req.fname,
         lname: req.lname,
         photoUrl: req.photoUrl,
-        userId: req.userId
+        userId: req.userId,
+		type: req.type,
+		role: req.role
     });
 });
 
