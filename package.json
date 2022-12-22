@@ -12,7 +12,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-validator": "^6.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "morgan": "~1.9.1",
     "mysqli": "^3.0.11",
     "swagger-jsdoc": "^3.5.0",
